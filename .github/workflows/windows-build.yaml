@@ -635,6 +635,8 @@ jobs:
           cp /mingw64/bin/libbz2-1.dll ${{ env.PACKAGE_DIR }} || echo "Warning: libbz2-1.dll not found"
           cp /mingw64/bin/liblzma-5.dll ${{ env.PACKAGE_DIR }} || echo "Warning: liblzma-5.dll not found"
           cp /mingw64/bin/zlib1.dll ${{ env.PACKAGE_DIR }} || echo "Warning: zlib1.dll not found"
+          # The CI-built FFmpeg DLLs import zlib as libz-1.dll; ship the same zlib under that name too.
+          cp /mingw64/bin/zlib1.dll ${{ env.PACKAGE_DIR }}/libz-1.dll || echo "Warning: could not create libz-1.dll"
           cp /mingw64/bin/libmfx-1.dll ${{ env.PACKAGE_DIR }} || echo "Warning: libmfx-1.dll not found"
           # libssp-0.dll may live outside /mingw64/bin depending on MSYS2 layout — search broadly
           if [ ! -f "${{ env.PACKAGE_DIR }}/libssp-0.dll" ]; then
